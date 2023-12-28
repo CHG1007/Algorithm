@@ -17,13 +17,13 @@ while L < R:
     Sum = lst[L] + lst[R]
     if abs(Min) > abs(Sum):
         Min = Sum
-        ans.append([L, R])
+        ans = [L, R]
 
     if Sum > 0:
         R -= 1
     elif Sum < 0:
         L += 1
-    elif Sum == 0:
+    else:
         break
 
-print(lst[ans[-1][0]], lst[ans[-1][1]])
+print(lst[ans[0]], lst[ans[1]])
