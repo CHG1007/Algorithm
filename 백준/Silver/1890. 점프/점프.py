@@ -10,13 +10,14 @@ dp[1][1] = 1
 
 for i in range(1, N+1):
     for j in range(1, N+1):
-        jump = arr[i][j]
         # 시작점부터 갈수있는 위치만 탐색
-        if dp[i][j] != 0 and jump != 0:
-            # 열 범위 내라면 -> 우측 이동
+        if dp[i][j] != 0 and arr[i][j] != 0:
+            jump = arr[i][j]
+            
+            # 행 범위 내라면 -> 아래 이동
             if i+jump <= N:
                 dp[i+jump][j] += dp[i][j]
-            # 행 범위 내라면 -> 아래 이동
+            # 열 범위 내라면 -> 우측 이동
             if j + arr[i][j] <= N:
                 dp[i][j+jump] += dp[i][j]
 
