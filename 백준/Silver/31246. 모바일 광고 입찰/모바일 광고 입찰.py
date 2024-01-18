@@ -10,7 +10,4 @@ for _ in range(N):
     arr.append(A-B)
 arr.sort(reverse=True)
 
-if arr[K-1] >= 0:
-    print(0)
-else:
-    print((-1)*arr[K-1])
+print(max(0, -arr[K-1]))
