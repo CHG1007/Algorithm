@@ -3,23 +3,21 @@ input = sys.stdin.readline
 
 
 N, K = map(int, input().split())
-lst = sorted(list(set([int(input()) for _ in range(N)])))
+sset = set()        # 동전 중복 제거
+for _ in range(N):
+    sset.add(int(input()))
 
 # dp[i]: i가치를 만드는 동전의 최소 개수
-dp = [0]*(10**7+1)
-for num in lst:
-    dp[num] = 1
+INF = K+1
+dp = [INF]*(K+1)
+dp[0] = 0
 
-for i in range(lst[0]+1, K+1):
-    tlst = []
-    for j in lst:
-        if i-j >= 0 and dp[i-j] != 0:
-            tlst.append(dp[i-j])
-    if tlst:
-        if dp[i] != 1:
-            dp[i] = min(tlst)+1
+for coin in sset:
+    for j in range(1, K+1):
+        if j-coin >= 0:
+            dp[j] = min(dp[j], dp[j-coin]+1)
 
-if dp[K] == 0:
-    print(-1)
-else:
-    print(dp[K])
+ans = dp[K]
+if ans == INF:
+    ans = -1
+print(ans)
