@@ -1,8 +1,8 @@
 def dfs(k, cnt, dungeons):
-    global ans
-    if cnt > ans:
-        ans = cnt
-    
+    global answer
+    if cnt > answer:
+        answer = cnt
+        
     for j in range(N):
         if k >= dungeons[j][0] and v[j] == 0:
             v[j] = 1
@@ -10,11 +10,12 @@ def dfs(k, cnt, dungeons):
             v[j] = 0
 
 def solution(k, dungeons):
-    global N, v, ans
+    global answer, N, v
     N = len(dungeons)
-    ans = 0
+    answer = 0
     v = [0]*N
     
     dfs(k, 0, dungeons)
     
-    return ans
+    
+    return answer
