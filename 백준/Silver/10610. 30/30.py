@@ -1,24 +1,12 @@
-from itertools import permutations
+lst = input()
+n = list(map(int, lst))
+lst = sorted(list(lst), reverse=True)
 
-
-def check(lst):
-    ans = 0
-    for num in permutations(lst, len(lst)):
-        tmp = ''
-        for n in num:
-            tmp += ''.join(str(n))
-        if int(tmp)%3 == 0:
-            ans = int(tmp)
-            break
-    print(tmp)
-
-
-n = list(map(int, input()))
-n.sort(reverse=True)
-
+# n에 0이 없거나, 합이 3의 배수가 아닌경우 즉시 종료
 if 0 not in n:
     print('-1')
 elif sum(n)%3 != 0:
     print('-1')
 else:
-    check(n)
+    # check(n)
+    print(''.join(lst))
