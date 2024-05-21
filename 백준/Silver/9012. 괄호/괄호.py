@@ -6,17 +6,16 @@ def solve():
         if data == '(':
             stack.append(data)
         else:
-            if len(stack) == 0:
-                print('NO')
-                return
+            if stack:
                 stack.pop()
             else:
-                stack.pop()
+                print('NO')
+                return
 
-    if len(stack) == 0:
-        print('YES')
-    else:
+    if stack:
         print('NO')
+    else:
+        print('YES')
 
 
 t = int(input())
