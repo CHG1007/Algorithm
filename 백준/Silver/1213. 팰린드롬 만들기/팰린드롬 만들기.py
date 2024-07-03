@@ -1,26 +1,25 @@
-name = input() # Ex) AAAABBC
-
+lst = input()
 count = dict()
-keys = sorted(list(set(name)))
+keys = sorted(list(set(lst)))
 odd = []
+
 for key in keys:
-    cnt = name.count(key)
+    cnt = lst.count(key)
     count[key] = cnt
-    if cnt % 2:
+    if cnt%2 == 1:
         odd.append(key)
 
 if len(odd) > 1:
     print("I'm Sorry Hansoo")
-
 else:
-    result = ''
+    ans = ''
 
-    for key in keys: # Ex) AAB 생성
-        result += key * (count[key] // 2)
+    for key in keys:
+        ans += key*(count[key]//2)
 
-    if odd: # Ex) AAB += C + BAA
-        result += odd[0] + result[::-1]
-    else: # Ex)AAB += BAA
-        result += result[::-1]
+    if odd:
+        ans += odd[0] + ans[::-1]
+    else:
+        ans += ans[::-1]
 
-    print(result)
+    print(ans)
