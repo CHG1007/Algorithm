@@ -11,10 +11,5 @@ def cnt(Map):
 n = int(input())
 
 arr = [list(input()) for _ in range(n)]
-arr2 = [[0]*n for _ in range(n)]
 
-for i in range(n):
-    for j in range(n):
-        arr2[i][j] = arr[j][i]
-
-print(cnt(arr), cnt(arr2))
+print(cnt(arr), cnt(list(zip(*arr))))
