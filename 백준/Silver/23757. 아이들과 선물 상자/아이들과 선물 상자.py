@@ -7,9 +7,9 @@ def box():
     for gift in child:
         rest = -heapq.heappop(q) - gift
 
-        if rest >= 0:
+        if rest > 0:
             heapq.heappush(q, -rest)
-        else:
+        elif rest < 0:
             return 0
     return 1
 
