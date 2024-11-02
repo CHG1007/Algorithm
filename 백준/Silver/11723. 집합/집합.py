@@ -1,6 +1,7 @@
 import sys
 input = sys.stdin.readline
 
+
 def add(n):
     if n not in lst:
         lst.append(n)
@@ -20,9 +21,9 @@ def check(n):
 
 def toggle(n):
     if n in lst:
-        lst.remove(n)
+        remove(n)
     else:
-        lst.append(n)
+        add(n)
 
 
 def all():
@@ -39,16 +40,18 @@ m = int(input())
 lst = []
 for _ in range(m):
     oper = list(input().split())
-
+    if len(oper)>=2:
+        num = oper[1]
+    
     f = oper[0]
     if f == 'add':
-        add(int(oper[1]))
+        add(int(num))
     elif f == 'remove':
-        remove(int(oper[1]))
+        remove(int(num))
     elif f == 'check':
-        check(int(oper[1]))
+        check(int(num))
     elif f == 'toggle':
-        toggle(int(oper[1]))
+        toggle(int(num))
     elif f == 'all':
         all()
     elif f == 'empty':
