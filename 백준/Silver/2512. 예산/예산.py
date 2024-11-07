@@ -16,12 +16,10 @@ def search():
         else:
             end = mid-1
 
-    if check(mid) < 0:
-        return mid-1
-    else:
-        return mid
+    return start-1
 
 
+# 상한액이 num일때 남은 예산
 def check(num):
     rest = m
     for data in lst:
