@@ -1,40 +1,27 @@
-import sys
-input = sys.stdin.readline
+#   암호 만들기  골드 5
 
-
-def dfs(n, s, tlst):
-    cnt = 0
-    if n == L:
-        if 'a' in tlst:
-            cnt += 1
-        if 'e' in tlst:
-            cnt += 1
-        if 'i' in tlst:
-            cnt += 1
-        if 'o' in tlst:
-            cnt += 1
-        if 'u' in tlst:
-            cnt += 1
-
-        if 1 <= cnt <= L-2:
-            ans.append(tlst)
+# n: 선택 횟수, c: 모음 갯수, tst: 현재까지 선택한 문자열
+def dfs(n, cnt, tst):
+    # c개의 문자들을 다 포함할지 안할지 선택했다면
+    if n == c:
+        # 문자열의 길이가 l, 모음갯수, 자음갯수 만족 여부
+        if len(tst) == l and cnt >= 1 and l-cnt >= 2:
+            ans.append(tst)
         return
 
-    for i in range(s, len(lst)):
-        if not v[i]:
-            v[i] = True
-            dfs(n+1, i, tlst + [lst[i]])
-            v[i] = False
+    dfs(n+1, cnt+check[ord(lst[n])], tst+lst[n])    # 선택 하는 경우
+    dfs(n+1, cnt, tst)                              # 선택 하지 않는 경우
 
 
-L, C = map(int, input().split())
-lst = list(input().split())
+l, c = map(int, input().split())
+lst = input().split()
+lst.sort()  # 사전순
 
-ans = []
-v = [False]*C
-# 문자열 정렬
-lst.sort()
+ans = []    # 정답 리스트
+check = [0]*126     # 모음 판별 리스트
+for ch in 'aeiou':
+    check[ord(ch)] = 1
 
-dfs(0, 0, [])
-for lst in ans:
-    print(*lst, sep='')
+dfs(0, 0, "")
+for st in ans:
+    print(st)
