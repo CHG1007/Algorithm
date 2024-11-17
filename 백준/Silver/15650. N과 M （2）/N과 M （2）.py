@@ -1,19 +1,19 @@
 #   N과 M (2)    실버 3
 
 
-def dfs(n, cnt, tlst):
-    if n > N:
-        if cnt == m:
-            ans.append(tlst)
+def dfs(n, s, lst):
+    if n == M:
+        ans.append(lst)
         return
 
-    dfs(n+1, cnt+1, tlst+[n])   # 선택하는 경우
-    dfs(n+1, cnt, tlst)         # 선택하지 않는 경우
+    for j in range(s, N+1):
+        dfs(n+1, j+1, lst+[j])
 
 
-N, m = map(int, input().split())
-
+N, M = map(int, input().split())
 ans = []
-dfs(1, 0, [])
+
+dfs(0, 1, [])
+
 for lst in ans:
     print(*lst)
