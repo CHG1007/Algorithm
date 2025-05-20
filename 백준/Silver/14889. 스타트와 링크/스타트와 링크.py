@@ -1,6 +1,10 @@
 #   스타트와 링크 실버 1
 
+import sys
+input = sys.stdin.readline
 
+
+# 팀 능력치 총합 계산
 def power_team(team):
     power = 0
     for i in range(len(team)):
@@ -11,6 +15,7 @@ def power_team(team):
     return power
 
 
+# 팀을 나누는 경우의 수
 def dfs(idx, s_team):
     global ans
     if idx == n:
