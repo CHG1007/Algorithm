@@ -1,30 +1,39 @@
+#   강아지는 많을수록 좋다    실버 1    개선버전
 from collections import deque
 
 
-def bfs(end):
-    q = deque()
-    v = [0] * (n + 1)
+def bfs(n, a, b, forbidden_ranges):
+    queue = deque()
+    visited = [0] * (n + 1)
 
-    q.append(0)
-    v[0] = 1
+    queue.append(0)
+    visited[0] = 1
 
-    while q:
-        ci = q.popleft()
-        if ci == end:
-            return v[ci] - 1
-        for di in (a, b):
-            ni = ci + di
-            if 0 <= ni <= n and v[ni] == 0:
-                for l, r in lst:
-                    if l <= ni <= r:
+    while queue:
+        cur = queue.popleft()
+
+        # 목표 수에 도달했을 경우
+        if cur == n:
+            return visited[cur] - 1
+
+        for d in (a, b):
+            next_cnt = cur + d
+            if 0 <= next_cnt <= n and visited[next_cnt] == 0:
+                # 금지 구간에 포함되면 스킵
+                for start, end in forbidden_ranges:
+                    if start <= next_cnt <= end:
                         break
                 else:
-                    q.append(ni)
-                    v[ni] = v[ci] + 1
+                    queue.append(next_cnt)
+                    visited[next_cnt] = visited[cur] + 1
+
+    # 도달 불가능
     return -1
 
 
-# 입력
+# 입력 처리
 n, m, a, b = map(int, input().split())
-lst = [tuple(map(int, input().split())) for _ in range(m)]
-print(bfs(n))
+forbidden_ranges = [tuple(map(int, input().split())) for _ in range(m)]
+
+# 결과 출력
+print(bfs(n, a, b, forbidden_ranges))
