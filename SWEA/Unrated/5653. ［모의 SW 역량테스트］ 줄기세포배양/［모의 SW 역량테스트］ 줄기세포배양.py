@@ -1,11 +1,12 @@
 # SWEA 5653. [모의 SW 역량테스트] 줄기세포배양
-# 제출용: input()만 사용 (sys 사용 X)
 
+# 키가 없을 때 자동으로 기본값(list)을 생성
 from collections import defaultdict
 
 
 def simulate(initial_cells, K):
-    # 모든 점유 칸 관리: (r, c) -> (life, created_time)
+    # 모든 점유 칸 관리 (죽은 세포도 점유 상태 유지)
+    # key: (r, c), value: (life, created_time)
     cells = {}
 
     # 번식 이벤트 테이블: repro[t] = [(life, ct, r, c), ...]
@@ -13,7 +14,7 @@ def simulate(initial_cells, K):
 
     # 초기 세포 등록(생성 시각 = 0) 및 첫 번식 스케줄링
     for r, c, life in initial_cells:
-        cells[(r, c)] = (life, 0)
+        cells[(r, c)] = (life, 0)   # 초기 배양판에서 세포가 있는 좌표만 반복
         t = life + 1                # 0 + life + 1
         if t <= K:
             repro[t].append((life, 0, r, c))
@@ -66,6 +67,8 @@ for tc in range(1, T + 1):
         for c, x in enumerate(row):
             if x > 0:
                 initial.append((r, c, x))
+
+    # print(*initial, sep='\n')
 
     # K시간 후 살아있는 세포(비활성+활성)의 총 개수
     ans = simulate(initial, K)
